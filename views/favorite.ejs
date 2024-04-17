@@ -1,0 +1,170 @@
+<!-- head -->
+<%- include('./partials/head') %>
+
+<!-- navbar -->
+<%- include('./partials/navbar') %>
+
+<!-- main -->
+<main>
+    <!-- list section -->
+    <section class="list-section">
+        <h1><%= list.title %></h1>
+        <p><%= list.description %></p>
+        <p><%= list.id %></p>
+    </section>
+
+    <!-- member section -->
+    <section class="member-section">
+        <h2>Groepsleden</h2>
+        <hr>
+        <ul class="member-list">
+            <li class="member-item">
+                <article class="member-add"><img src="/assets/icon-add-big.svg" alt="icon-add"></article>
+                <p>Voeg toe</p>
+            </li>
+            <% for(let i = 0; i <= 5; i++) { %>
+            <li class="member-item">
+                <article class="member-profile">
+                    <img src="/assets/Mohammed.png" alt="icon-profile">
+                </article>
+                <p>Mohammed</p>
+            </li>
+            <% } %>
+        </ul>
+    </section>
+
+    <!-- search section -->
+    <section class="search-section">
+        <ul class="search-list">
+            <li class="search-item">
+                <input type="search" placeholder="Zoek op plaats, buurt of postcode">
+            </li>
+            <li class="search-item">
+                <button type="button" class="btn-map">
+                    <img src="/assets/icon-map.svg" alt="icon-map">
+                </button>
+            </li>
+        </ul>
+        <hr>
+    </section>
+
+    <!-- option section -->
+    <section class="option-section">
+        <ul class="option-list">
+            <li class="option-item">
+                <button type="button" class="btn-option">
+                    <img src="/assets/icon-filter.svg" alt="icon-filter">
+                    <p>Filters</p>
+                </button>
+            </li>
+            <li class="option-item">
+                <button type="button" class="btn-option">
+                    <img src="/assets/icon-sort.svg" alt="icon-sort">
+                    <p>Sorteren</p>
+                </button>
+            </li>
+            <li class="option-item">
+                <button type="button" class="btn-option">
+                    <img src="/assets/icon-add.svg" alt="icon-add">
+                    <p>Voeg toe</p>
+                </button>
+            </li>
+        </ul>
+    </section>
+
+    <!-- house section -->
+    <section class="house-section">
+        <ul class="house-list">
+            <% houses.forEach(house => { %>
+            <li class="house-item">
+                <article class="house-image">
+                    <img src="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>" alt="house-img">
+                </article>
+                <ul class="house-details">
+                    <li class="house-title">
+                        <h2><a href="/house/<%= house.f_houses_id.id %>"><%= house.f_houses_id.street + house.f_houses_id.house_nr + house.f_houses_id.nr_addition %></a></h2>
+                        <button type="button" class="btn-remove"><img src="/assets/icon-remove.svg" alt="icon-remove"></button>
+                    </li>
+                    <li><%= house.f_houses_id.postal_code + house.f_houses_id.city %></li>
+                    <li class="house-price"><%= new Intl.NumberFormat('en-DE', { style: 'currency', currency: 'EUR' }).format(house.f_houses_id.price) %> k.k.</li>
+                    <li><%= house.f_houses_id.m2 + "m² / " + house.f_houses_id.m2_garden + "m² / " + house.f_houses_id.rooms + " kamers" %></li>
+                    <li class="house-agent"><%= house.f_houses_id.agent !== null && house.f_houses_id.agent !== "" ? house.f_houses_id.agent : "geen makelaar" %></li>
+                </ul>
+                <ul class="house-rating-list">
+                    <li class="rating-item">
+                        <button type="button" class="btn-type-2 btn-group-rating">+ Groepsrating</button>
+                    </li>
+                    <li class="rating-item">
+                        <%- include('./partials/star-rating', {input: false, category: "none"}) %>
+                    </li>
+                </ul>
+                <article class="group-rating-article hidden">
+                    <h3>Score</h3>
+                    <ul class="group-rating-list">
+                        <li class="group-rating-item">
+                            <ul class="user-list">
+                                <li class="user-item">
+                                    <button type="button" class="btn-type-2 btn-user-rating">+ Mohammed</button>
+                                </li>
+                                <li class="user-item"><%- include('./partials/star-rating', {input: false, category: "none"}) %></li>
+                            </ul>
+
+                            <form method="POST" action="/favorite/<%= list.id %>" class="user-rating-form hidden">
+                                <input type="hidden" value="<%= house.f_houses_id.id %>" name="houseId">
+                                <input type="hidden" value="65" name="userId">
+                                <ul class="user-rating-list">
+                                    <li class="user-rating-item">
+                                        <p>Algemeen</p>
+                                        <%- include('./partials/star-rating', {input: true, category: "algemeen"}) %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Keuken</p>
+                                        <%- include('./partials/star-rating', {input: true, category: "keuken"}) %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Badkamer</p>
+                                        <%- include('./partials/star-rating', {input: true, category: "badkamer"}) %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Tuin</p>
+                                        <%- include('./partials/star-rating', {input: true, category: "tuin"}) %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Prijs</p>
+                                        <%- include('./partials/star-rating', {input: true, category: "prijs"}) %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Ligging</p>
+                                        <%- include('./partials/star-rating', {input: true, category: "ligging"}) %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Oppervlakte</p>
+                                        <%- include('./partials/star-rating', {input: true, category: "oppervlakte"}) %>
+                                    </li>
+                                </ul>
+
+                                <h3>Notities</h3>
+                                <textarea name="notes"></textarea>
+                                <ul class="rating-button-list">
+                                    <li class="rating-button-item">
+                                        <button type="submit" class="btn-type-1">Opslaan</button>
+                                    </li>
+                                    <li class="rating-button-item">
+                                        <button type="button" class="btn-type-2">
+                                            <img src="/assets/icon-remove.svg" alt="icon-trash">
+                                            Verwijderen
+                                        </button>
+                                    </li>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </article>
+            </li>
+            <%  }) %>
+        </ul>
+    </section>
+</main>
+
+<!-- foot -->
+<%- include('./partials/foot') %>

@@ -1,0 +1,61 @@
+<!-- head -->
+<%- include('./partials/head') %>
+
+<!-- navbar -->
+<%- include('./partials/navbar') %>
+
+<!-- main -->
+<main>
+    <section class="main-padding">
+    <h1>Favorieten lijst</h1>
+    <h2 class="favorite-title"><%= list.title %></h2>
+    <p class="favorite-description"><%= list.description %></p>
+    <section class="member-section">
+        <h3>Groeps leden</h3>
+        <ul class="member-list">
+            <li>
+                <div class="profile-container">
+                    <img src="/assets/Mohammed.png" alt="profile-img">
+                </div>
+                <p>Mohammed</p>
+            </li>
+            <li><img src="/assets/plus.svg" alt="plus-icon"></li>
+        </ul>
+    </section>
+
+    <div class="search-bar">
+        <input type="search" placeholder="zoek naar huis in lijst...">
+        <button type="button" class="btn-primary">Zoek</button>
+    </div>
+
+    <div class="sort-add-section">
+        <select aria-label="sort">
+            <option disabled selected>Sorteren</option>
+            <option>Bewaardatum</option>
+            <option>Bewaardatum</option>
+            <option>Objectscore</option>
+            <option>Datum</option>
+            <option>Plaats</option>
+            <option>Postcode</option>
+            <option>Adres</option>
+            <option>Vraagprijs</option>
+            <option>Huurprijs</option>
+            <option>Gebruiksopp.</option>
+            <option>Perceelopp.</option>
+            <option>Kamers</option>
+        </select>
+        <button class="btn-secondary" type="button"><i class="fa-solid fa-plus"></i> Voeg huis toe</button>
+    </div>
+
+    <div class="house-section">
+        <ul class="house-list">
+            <% houses.forEach(house => { %>
+                <%- include('./partials/houses', {house: house.f_houses_id}) %>
+            <%  }) %>
+        </ul>
+    </div>
+    </section>
+</main>
+
+<!-- foot -->
+<%- include('./partials/foot') %>

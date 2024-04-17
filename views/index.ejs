@@ -1,0 +1,48 @@
+<!-- head -->
+<%- include('./partials/head') %>
+
+<!-- navbar -->
+<%- include('./partials/navbar') %>
+
+<!-- main -->
+<main>
+    <section class="main-padding">
+    <h1>Alle huizen</h1>
+
+    <a href="/favorite/8">Favorieten lijst</a>
+
+    <div class="search-bar">
+        <input type="search" placeholder="zoek naar huis in lijst...">
+        <button type="button" class="btn-primary" type="button">Zoek</button>
+    </div>
+
+    <div class="sort-section">
+        <select>
+            <option disabled selected>Sorteren</option>
+            <option>Bewaardatum</option>
+            <option>Bewaardatum</option>
+            <option>Objectscore</option>
+            <option>Datum</option>
+            <option>Plaats</option>
+            <option>Postcode</option>
+            <option>Adres</option>
+            <option>Vraagprijs</option>
+            <option>Huurprijs</option>
+            <option>Gebruiksopp.</option>
+            <option>Perceelopp.</option>
+            <option>Kamers</option>
+        </select>
+    </div>
+
+    <div class="house-section">
+        <ul class="house-list">
+            <% houses.forEach(house => { %>
+                <%- include('./partials/houses', {house: house}) %>
+            <%  }) %>
+        </ul>
+    </div>
+    </section>
+</main>
+
+<!-- foot -->
+<%- include('./partials/foot') %>

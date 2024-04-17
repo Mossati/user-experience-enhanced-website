@@ -1,0 +1,61 @@
+<!-- head -->
+<%- include('./partials/head') %>
+
+<!-- navbar -->
+<%- include('./partials/navbar') %>
+
+<!-- main -->
+<main>
+    <ul class="image-grid">
+        <% if (house.gallery !== null && house.gallery.length > 0) { %>
+            <% house.gallery.forEach(image => {%>
+                <li><img src="https://fdnd-agency.directus.app/assets/<%= image.directus_files_id %>" alt="huis-img"></li>
+            <% }) %>
+        <% }else if (house.poster_image) { %>
+            <li><img src="https://fdnd-agency.directus.app/assets/<%= house.poster_image.id %>" alt="huis-img"></li>
+        <% } %>
+    </ul>
+    <ul class="house-options">
+        <li><img src="/assets/images.svg" alt="images-icon"> Foto's</li>
+        <li><img src="/assets/size-1.svg" alt="size-icon"> Plattegrond</li>
+        <li><img src="/assets/turn.svg" alt="turn-icon"> 360° foto's</li>
+        <li><img src="/assets/video.svg" alt="video-icon"> Video</li>
+        <li><img src="/assets/media.svg" alt="media-icon"> All media</li>
+    </ul>
+    <section class="main-padding">
+    <article class="row">
+        <div class="col">
+            <h1><%= house.street + " " +house.house_nr + " " + house.nr_addition %></h1>
+            <p class="postal_code"><%= house.postal_code + house.city %></p>
+            <a class="house-street" href="#"><%= house.street %></a>
+
+            <ul class="house-details">
+                <li>
+                    <img src="/assets/size.svg" alt="m2-icon">
+                    <%= house.m2 %>m²
+                </li>
+                <li>
+                    <img src="/assets/perceel.svg" alt="m2-garden-icon">
+                    <%= house.m2_garden %>m²
+                </li>
+                <li>
+                    <img src="/assets/room.svg" alt="room-icon">
+                    <%= house.rooms %>
+                </li>
+            </ul>
+
+            <p class="agent"><%= house.agent %></p>
+            <p class="price">€ <%= house.price %> k.k.</p>
+        </div>
+        <div class="col">
+            <img src="/assets/map.svg" alt="map-icon">
+        </div>
+    </article>
+
+    <h2 class="house-title">Omschrijving</h2>
+    <p><%- house.description %></p>
+    </section>
+</main>
+
+<!-- foot -->
+<%- include('./partials/foot') %>

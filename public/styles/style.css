@@ -1,0 +1,483 @@
+/* ================================================ */
+/* root */
+/* ================================================ */
+:root {
+    --white: #FFFFFF;
+    --web-orange: #F7A100;
+    --regent-blue: #E6F2F7;
+    --lochmara: #0071B3;
+    --mine-shaft: #333333;
+    --silver: #CCCCCC;
+    --orange-darker: #DE9000;
+    --bahama-blue: #006199;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 100%;
+    min-height: 100%;
+    line-height: 1.5;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: var(--mine-shaft);
+}
+
+.hidden {
+    display: none;
+}
+/* ================================================ */
+/* rating */
+/* ================================================ */
+.star-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+
+    & .star-item input {
+        /* display: none; */
+    }
+
+    & .star-item label {
+        width: 1.5em;
+        height: 1.5em;
+        cursor: pointer;
+        transition: 0.5s ease;
+        margin-right: 1em;
+    }
+
+    & .star-item label::before {
+        content: url('/assets/icon-star.svg');
+    }
+
+    & .star-item input:checked ~ label {
+        content: url('/assets/icon-star-filled.svg');
+    }
+
+    & .star-item:not(:checked) > label:hover,
+    .star-item:not(:checked) > label:hover ~ label {
+        content: url('/assets/icon-star-filled.svg');
+    }
+
+    & .star-item input:checked > label:hover,
+    .star-item input:checked > label:hover ~ label {
+        content: url('/assets/icon-star-filled.svg');
+    }
+}
+/* ================================================ */
+/* buttons */
+/* ================================================ */
+.btn-option {
+    background-color: var(--regent-blue);
+    padding: 0.75em;
+    border-radius: 0.75em;
+    color: var(--lochmara);
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.btn-type-1 {
+    background-color: var(--web-orange);
+    color: var(--white);
+    padding: 0.75em;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.btn-type-2 {
+    background: none;
+    color: var(--lochmara);
+    padding: 0.75em;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+hr {
+    border: 0.075em solid var(--silver);
+}
+/* ================================================ */
+/* navbar */
+/* ================================================ */
+nav {
+    background-color: var(--web-orange);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+    font-size: 0.75em;
+    margin-bottom: 1em;
+
+    & .nav-section {
+
+        & .nav-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            list-style-type: none;
+
+            & .nav-item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0.75em;
+                color: var(--white);
+                text-overflow: ellipsis;
+
+                & img {
+                    width: 2em;
+                    height: 2em;
+                }
+
+                & .logo-funda {
+                    width: 7.75em;
+                    height: auto;
+                }
+            }
+
+            & .nav-item:hover {
+                background-color: var(--orange-darker);
+            }
+        }
+    }
+
+    & .nav-section:nth-child(1) {
+        & .nav-list {
+            & .nav-item:nth-child(2):hover {
+                background: none;
+            }
+        }
+    }
+}
+/* ================================================ */
+/* list */
+/* ================================================ */
+.list-section {
+    padding: 0 1em;
+    margin-bottom: 1em;
+
+    & h1 {
+        font-weight: bold;
+    }
+}
+/* ================================================ */
+/* members */
+/* ================================================ */
+.member-section {
+    padding: 0 1em;
+    margin-bottom: 1em;
+    
+    & h2 {
+        font-size: 1.2em;
+    }
+
+    & .member-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        list-style-type: none;
+        overflow-y: scroll;
+
+        & .member-item {
+            padding: 0.75em;
+            text-align: center;
+
+            & .member-add {
+                width: 5em;
+                height: 5em;
+                background-color: var(--regent-blue);
+                border-radius: 50%;
+                color: var(--lochmara);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            & .member-profile {
+                width: 5em;
+                height: 5em;
+                background-color: var(--silver);
+                border-radius: 50%;
+                color: var(--lochmara);
+                overflow: hidden;
+
+                & img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+            }
+
+            & p {
+                color: var(--lochmara);
+                font-weight: bold;
+            }
+        }
+    }
+}
+/* ================================================ */
+/* search */
+/* ================================================ */
+.search-section {
+    width: 100%;
+    padding: 0 1em;
+    margin-bottom: 1em;
+
+    & .search-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+        margin-bottom: 1em;
+
+        & .search-item {
+            flex: 0 0 auto;
+
+            & input {
+                background-color: var(--white);
+                padding: 1em;
+                border-radius: 0.75em;
+                border: 0.175em solid var(--silver);
+                width: 100%;
+            }
+
+            & .btn-map {
+                background-color: var(--white);
+                color: var(--lochmara);
+                border: 0.175em solid var(--lochmara);
+                padding: 0.75em;
+                border-radius: 0.75em;
+                outline: none;
+                text-decoration: none;
+            }
+        }
+
+        & .search-item:nth-child(1) {
+            margin-right: 0.75em;
+            flex: 3;
+        }
+    }
+}
+/* ================================================ */
+/* options */
+/* ================================================ */
+.option-section {
+    padding: 0 1em;
+    margin-bottom: 1em;
+
+    & .option-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+        width: 100%;
+
+        & .option-item {
+            flex: 1;
+            margin-right: 0.75em;
+
+            & .btn-option {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        & .option-item:last-child {
+            margin-right: 0;
+        }
+    }
+}
+/* ================================================ */
+/* houses */
+/* ================================================ */
+.house-section {
+    padding: 0 1em;
+    margin-bottom: 1em;
+
+    & .house-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+        width: 100%;
+
+        & .house-item {
+            background-color: var(--white);
+            width: inherit;
+            margin-bottom: 1em;
+
+            & .house-image {
+                width: 100%;
+                height: auto;
+                background-color: var(--silver);
+                margin-bottom: 0.5em;
+
+                & img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+            }
+
+            & .house-details {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                list-style-type: none;
+                
+                & .house-title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+
+                    & h2 {
+                        font-size: 1em;
+                        & a {
+                            color: var(--lochmara);
+                            text-decoration: none;
+                        }
+                    }
+
+                    & .btn-remove {
+                        background: none;
+                        border: none;
+                        outline: none;
+                    }
+                }
+
+                & .house-price {
+                    font-weight: bold;
+                }
+
+                & .house-agent {
+                    color: var(--lochmara);
+                }
+            }
+
+            & .house-rating-list {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                list-style-type: none;
+                margin-top: 1em;
+
+                & .rating-item:nth-child(1) {
+                    color: var(--lochmara);
+                    
+                    & .btn-type-2 {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+/* ================================================ */
+/* group score */
+/* ================================================ */
+.group-rating-article {
+    background-color: var(--regent-blue);
+    padding: 0 0.75em;
+
+    & h3 {
+        padding-top: 1em;
+    }
+
+    & .group-rating-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+        width: 100%;
+
+        & .group-rating-item {
+            width: inherit;
+
+            & .user-list {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                list-style-type: none;
+                width: inherit;
+                margin-bottom: 1em;
+
+                & .user-item:nth-child(1) {
+                    color: var(--lochmara);
+
+                    & .btn-type-2 {
+                        padding: 0;
+                    }
+                }
+            }
+
+            & .user-rating-form {
+                & .user-rating-list {
+                    list-style-type: none;
+    
+                    & .user-rating-item {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                }
+
+                & textarea {
+                    width: 100%;
+                    height: 10em;
+                    resize: none;
+                    outline: none;
+                    border: 0.1em solid var(--silver);
+                    margin-bottom: 1em;
+                    padding: 1em;
+                }
+
+                & .rating-button-list {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    align-items: center;
+                    list-style-type: none;
+                    margin-bottom: 1em;
+
+                    & .rating-button-item {
+                        & .btn-type-2 {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
