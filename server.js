@@ -69,6 +69,7 @@ app.post('/favorite/:id', function (request, response) {
     const userId = request.body.userId
     const houseRatings = []
     const notes = request.body.notes
+    const listId = request.params.id;
 
     const categories = ['algemeen', 'keuken', 'badkamer', 'tuin', 'prijs', 'ligging', 'oppervlakte'];
 
@@ -80,7 +81,7 @@ app.post('/favorite/:id', function (request, response) {
     FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings, notes: notes})
     console.log(FavoriteRatings)
     
-    response.redirect(303, '/')
+    response.redirect(303, '/favorite/' + listId)
 })
 
 // Stel het poortnummer in waar express op moet gaan luisteren
