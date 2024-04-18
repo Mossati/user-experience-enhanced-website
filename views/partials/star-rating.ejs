@@ -1,32 +1,10 @@
 <ul class="star-list">
-    <li class="star-item">
-        <label for="<%= category %>-star1"></label>
-        <% if (input) {%>
-            <input type="radio" name="<%= category %>" id="<%= category %>-star1" value="1">
-        <% }%>
-    </li>
-    <li class="star-item">
-        <label for="<%= category %>-star2"></label>
-        <% if (input) {%>
-            <input type="radio" name="<%= category %>" id="<%= category %>-star2" value="2">
-        <% }%>
-    </li>
-    <li class="star-item">
-        <label for="<%= category %>-star3"></label>
-        <% if (input) {%>
-            <input type="radio" name="<%= category %>" id="<%= category %>-star3" value="3">
-        <% }%>
-    </li>
-    <li class="star-item">
-        <label for="<%= category %>-star4"></label>
-        <% if (input) {%>
-            <input type="radio" name="<%= category %>" id="<%= category %>-star4" value="4">
-        <% }%>
-    </li>
-    <li class="star-item">
-        <label for="<%= category %>-star5"></label>
-        <% if (input) {%>
-            <input type="radio" name="<%= category %>" id="<%= category %>-star5" value="5">
-        <% }%>
-    </li>
+    <% for (let i = 1; i <= 5; i++) { %>
+        <li class="star-item">
+            <label for="<%= category %>-star<%= i %>"></label>
+            <% if (input) { %>
+            <input type="radio" name="<%= category %>" id="<%= category %>-star<%= i %>" value="<%= i %>">
+            <% } %>
+        </li>
+    <% } %>
 </ul>

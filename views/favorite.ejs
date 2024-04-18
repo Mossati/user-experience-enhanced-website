@@ -7,29 +7,38 @@
 <!-- main -->
 <main>
     <!-- list section -->
-    <section class="list-section">
+    <section class="list-section list-mobile">
         <h1><%= list.title %></h1>
         <p><%= list.description %></p>
     </section>
 
+    <div class="main-section">
     <!-- member section -->
     <section class="member-section">
         <h2>Groepsleden</h2>
         <hr>
         <ul class="member-list">
             <li class="member-item">
-                <article class="member-add"><img src="/assets/icon-add-big.svg" alt="icon-add"></article>
+                <article class="member-add"><img src="/assets/icon-add-big.svg" alt="icon-add" width="48" height="48"></article>
                 <p>Voeg toe</p>
             </li>
-            <% for(let i = 0; i <= 5; i++) { %>
+            <% for(let i = 1; i <= 5; i++) { %>
             <li class="member-item">
                 <article class="member-profile">
-                    <img src="/assets/Mohammed.png" alt="icon-profile">
+                    <img src="/assets/User<%= i %>.png" alt="icon-profile" width="171" height="171">
                 </article>
-                <p>Mohammed</p>
+                <p>Gebruiker <%= i %></p>
             </li>
             <% } %>
         </ul>
+    </section>
+    </div>
+
+    <div class="main-section">
+    <!-- list section -->
+    <section class="list-section list-desktop">
+        <h1><%= list.title %></h1>
+        <p><%= list.description %></p>
     </section>
 
     <!-- search section -->
@@ -40,7 +49,7 @@
             </li>
             <li class="search-item">
                 <button type="button" class="btn-map">
-                    <img src="/assets/icon-map.svg" alt="icon-map">
+                    <img src="/assets/icon-map.svg" alt="icon-map" width="24" height="24">
                 </button>
             </li>
         </ul>
@@ -52,13 +61,13 @@
         <ul class="option-list">
             <li class="option-item">
                 <button type="button" class="btn-option">
-                    <img src="/assets/icon-filter.svg" alt="icon-filter">
+                    <img src="/assets/icon-filter.svg" alt="icon-filter" width="24" height="24">
                     <p>Filters</p>
                 </button>
             </li>
             <li class="option-item">
                 <button type="button" class="btn-option">
-                    <img src="/assets/icon-sort.svg" alt="icon-sort">
+                    <img src="/assets/icon-sort.svg" alt="icon-sort" width="24" height="24">
                     <p>Sorteren</p>
                 </button>
             </li>
@@ -71,44 +80,76 @@
         </ul>
     </section>
 
+    <!-- success bar -->
+    <p class="success-bar hidden">Huis rating is bijgewerkt!</p>
+
     <!-- house section -->
     <section class="house-section">
         <ul class="house-list">
-            <% houses.forEach(house => { %>
+            <% houses.forEach((house, index) => { %>
             <li class="house-item">
-                <article class="house-image">
-                    <img src="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>" alt="house-img">
-                </article>
+                <article class="house-content">
+                <!-- house image -->
+                <div class="house-image">
+                    <img src="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>" alt="house-img" width="1080" height="720">
+                </div>
+
+                <!-- house details -->
                 <ul class="house-details">
                     <li class="house-title">
                         <h2><a href="/house/<%= house.f_houses_id.id %>"><%= house.f_houses_id.street + house.f_houses_id.house_nr + house.f_houses_id.nr_addition %></a></h2>
-                        <button type="button" class="btn-remove"><img src="/assets/icon-remove.svg" alt="icon-remove"></button>
+                        <button type="button" class="btn-remove"><img src="/assets/icon-remove.svg" alt="icon-remove" width="24" height="24"></button>
                     </li>
                     <li><%= house.f_houses_id.postal_code + house.f_houses_id.city %></li>
                     <li class="house-price"><%= new Intl.NumberFormat('en-DE', { style: 'currency', currency: 'EUR' }).format(house.f_houses_id.price) %> k.k.</li>
                     <li><%= house.f_houses_id.m2 + "m² / " + house.f_houses_id.m2_garden + "m² / " + house.f_houses_id.rooms + " kamers" %></li>
                     <li class="house-agent"><%= house.f_houses_id.agent !== null && house.f_houses_id.agent !== "" ? house.f_houses_id.agent : "geen makelaar" %></li>
                 </ul>
+                </article>
+
+                <article class="house-content">
+                <!-- house rating list -->
                 <ul class="house-rating-list">
                     <li class="rating-item">
-                        <button type="button" class="btn-type-2 btn-group-rating">+ Groepsrating</button>
+                        <button type="button" class="btn-type-2 btn-group-rating">Groepsrating</button>
                     </li>
                     <li class="rating-item">
                         <%- include('./partials/star-rating', {input: false, category: "none"}) %>
                     </li>
                 </ul>
+
+                <!-- rating score list -->
                 <article class="group-rating-article hidden">
                     <h3>Score</h3>
                     <ul class="group-rating-list">
                         <li class="group-rating-item">
                             <ul class="user-list">
                                 <li class="user-item">
-                                    <button type="button" class="btn-type-2 btn-user-rating">+ Mohammed</button>
+                                    <button type="button" class="btn-type-2 btn-user-rating">Gebruiker 1</button>
                                 </li>
                                 <li class="user-item"><%- include('./partials/star-rating', {input: false, category: "none"}) %></li>
                             </ul>
 
+                            <!-- rating form -->
                             <form method="POST" action="/favorite/<%= list.id %>" class="user-rating-form hidden">
+                                <!-- CLS test -->
+                                <div class="rating-test">
+                                    <%= index %>
+                                    <% if (ratings[index] && ratings.length > 0) { %>
+                                    <p>House: <%= ratings[index].houseId %></p>
+                                    <p>User: <%= ratings[index].userId %></p>
+                                    <p>Algemeen: <%= ratings[index].rating['algemeen'] %></p>
+                                    <p>Keuken: <%= ratings[index].rating['keuken'] %></p>
+                                    <p>Badkamer: <%= ratings[index].rating['badkamer'] %></p>
+                                    <p>Tuin: <%= ratings[index].rating['tuin'] %></p>
+                                    <p>Prijs: <%= ratings[index].rating['prijs'] %></p>
+                                    <p>Ligging: <%= ratings[index].rating['ligging'] %></p>
+                                    <p>Oppervlakte: <%= ratings[index].rating['oppervlakte'] %></p>
+                                    <p>Note: <%= ratings[index].notes %></p>
+                                    <hr>
+                                    <% } %>
+                                </div>
+                                
                                 <input type="hidden" value="<%= house.f_houses_id.id %>" name="houseId">
                                 <input type="hidden" value="65" name="userId">
                                 <ul class="user-rating-list">
@@ -150,7 +191,7 @@
                                     </li>
                                     <li class="rating-button-item">
                                         <button type="button" class="btn-type-2">
-                                            <img src="/assets/icon-remove.svg" alt="icon-trash">
+                                            <img src="/assets/icon-remove.svg" alt="icon-trash" width="24" height="24">
                                             Verwijderen
                                         </button>
                                     </li>
@@ -159,10 +200,12 @@
                         </li>
                     </ul>
                 </article>
+                </article>
             </li>
             <%  }) %>
         </ul>
     </section>
+</div>
 </main>
 
 <!-- foot -->

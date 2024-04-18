@@ -57,7 +57,7 @@ app.post('/', function (request, response) {
 app.get('/favorite/:id', function (request, response) {
     fetchJson(favoriteList + "/" + request.params.id + '?fields=*.*.*').then((listData) => {
         //console.log(listData.data.houses)
-        //console.log(FavoriteRatings)
+        console.log(FavoriteRatings)
 
         response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
     })
@@ -65,23 +65,60 @@ app.get('/favorite/:id', function (request, response) {
 
 // Maak een POST route voor de favorite pagina
 app.post('/favorite/:id', function (request, response) {
-    const houseId = request.body.houseId
-    const userId = request.body.userId
+    // Variabelen
+    const houseId = parseInt(request.body.houseId, 10)
+    const userId = parseInt(request.body.userId, 10)
     const houseRatings = []
     const notes = request.body.notes
-    const listId = request.params.id;
+    const listId = request.params.id
 
-    const categories = ['algemeen', 'keuken', 'badkamer', 'tuin', 'prijs', 'ligging', 'oppervlakte'];
+    // Categorieën
+    const categories = ['algemeen', 'keuken', 'badkamer', 'tuin', 'prijs', 'ligging', 'oppervlakte']
 
-    categories.forEach(category => {
-        const rating = request.body[category];
-        houseRatings[category] = rating;
-    });
+    // Zoek naar bestaande entry in array
+    const existingIndex = FavoriteRatings.findIndex(entry => entry.houseId === houseId && entry.userId === userId)
 
-    FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings, notes: notes})
-    console.log(FavoriteRatings)
-    
-    response.redirect(303, '/favorite/' + listId)
+    // Bestaande entry gevonden
+    if (existingIndex !== -1) {
+      // Loop door alle categorieën
+      categories.forEach(category => {
+          // Sla de value van de form op en parse het naar een integer
+          let rating = parseInt(request.body[category], 10)
+          // Als rating undefined is maak het dan standaard 0
+          if (!rating) {
+              rating = 0;
+          }
+          // Sla de rating op in een tijdelijke array
+          houseRatings[category] = rating;
+      });
+
+      // Pas de array aan van de gevonden index
+      FavoriteRatings[existingIndex] = { houseId: houseId, userId: userId, rating: houseRatings, notes: notes };
+    } else { // Geen bestaande entry gevonden
+      // Loop door alle categorieën
+      categories.forEach(category => {
+          // Sla de value van de form op en parse het naar een integer
+          let rating = parseInt(request.body[category], 10);
+          // Als rating undefined is maak het dan standaard 0
+          if (!rating) {
+              rating = 0;
+          }
+          // Sla de rating op in een tijdelijke array
+          houseRatings[category] = rating;
+      });
+
+      // Push de waarden in een nieuwe entry
+      FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings, notes: notes })
+      // Log de array
+      //console.log(FavoriteRatings)
+    }
+
+    // Als er een enhanced property is dan wordt er een render gedaan client-side
+    if (request.body.enhanced) {
+      response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
+    } else { // Geen enhanced property dus wordt er een redirect gedaan
+      response.redirect(303, '/favorite/' + listId)
+    }
 })
 
 // Stel het poortnummer in waar express op moet gaan luisteren
