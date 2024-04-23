@@ -58,7 +58,7 @@ app.post('/', function (request, response) {
 app.get('/favorite/:id', function (request, response) {
     fetchJson(f_list + "/" + request.params.id + '?fields=*.*.*').then((listData) => {
         //console.log(listData.data.houses)
-        console.log(FavoriteRatings)
+        //console.log(FavoriteRatings)
 
         response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
     })
@@ -68,10 +68,10 @@ app.get('/favorite/:id', function (request, response) {
 app.post('/favorite/:id', function (request, response) {
     // Variabelen
     const houseId = parseInt(request.body.houseId, 10)
-    const userId = parseInt(request.body.userId, 10)
+    const listId = parseInt(request.params.id, 10)
     const houseRatings = {}
     const notes = request.body.notes
-    const listId = request.params.id
+    const userId = parseInt(request.body.userId, 10)
 
     // Categorieën
     const categories = ['algemeen', 'keuken', 'badkamer', 'tuin', 'prijs', 'ligging', 'oppervlakte']
@@ -81,43 +81,42 @@ app.post('/favorite/:id', function (request, response) {
       // Sla de value van de form op en parse het naar een integer
       let rating = parseInt(request.body[category], 10)
       // Als rating undefined is maak het dan standaard 0
-      if (!rating) {
+      if (isNaN(rating)) {
         rating = 0
       }
       // Sla de rating op in een tijdelijke array
       houseRatings[category] = rating
     })
 
-    fetchJson(f_feedback).then((apiResponse) => {
-      try {
-        apiResponse.data.rating = JSON.parse(apiResponse.data.rating)
-      } catch (e) {
-        apiResponse.data.rating = {}
-      }
-
-      apiResponse.data.rating = apiResponse.data.rating
-    })
+    houseRatings['note'] = notes
+    console.log('House ID: ' + houseId)
+    console.log('User ID: ' + userId)
+    console.log('List ID: ' + listId)
+    console.log(houseRatings)
 
     fetchJson(f_feedback, {
       method: 'POST',
       body: JSON.stringify({
-      house: houseId,
-      list: listId,
-      user: userId,
-      note: notes,
-      rating: houseRatings
+        House: houseId,
+        List: listId,
+        Rating: houseRatings,
+        User: userId
     }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8'
     }
-    }).then((response) => {
+    }).then((apiresponse) => {
       // Als er een enhanced property is dan wordt er een render gedaan client-side
       if (request.body.enhanced) {
         response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
       } else { // Geen enhanced property dus wordt er een redirect gedaan
         response.redirect(303, '/favorite/' + listId)
       }
-    })
+    }).catch((error) => {
+      // error
+      console.error('Error:', error);
+      response.status(500).send('Er is een fout opgetreden bij het verwerken van uw verzoek.');
+  })
 })
 
 // Stel het poortnummer in waar express op moet gaan luisteren
