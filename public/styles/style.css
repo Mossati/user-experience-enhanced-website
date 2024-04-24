@@ -250,6 +250,7 @@ nav {
             & p {
                 color: var(--lochmara);
                 font-weight: bold;
+                text-wrap: nowrap;
             }
         }
     }
@@ -285,7 +286,7 @@ nav {
                 background-color: var(--white);
                 color: var(--lochmara);
                 border: 0.175em solid var(--lochmara);
-                padding: 0.75em;
+                padding: 0.5em;
                 border-radius: 0.75em;
                 outline: none;
                 text-decoration: none;
@@ -353,7 +354,7 @@ nav {
 
             & .house-image {
                 width: 100%;
-                height: auto;
+                height: 170px;
                 background-color: var(--silver);
                 margin-bottom: 0.5em;
 
