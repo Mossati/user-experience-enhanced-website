@@ -25,7 +25,10 @@
             <% for(let i = 1; i <= 5; i++) { %>
             <li class="member-item">
                 <article class="member-profile">
-                    <img src="/assets/User<%= i %>.png" alt="icon-profile" width="171" height="171">
+                    <picture>
+                        <source srcset="/assets/User<%= i %>.webp" type="image/webp">
+                        <img loading="lazy" src="/assets/User<%= i %>.png" alt="icon-profile" width="171" height="171">
+                    </picture>
                 </article>
                 <p>Gebruiker <%= i %></p>
             </li>
@@ -91,7 +94,10 @@
                 <article class="house-content">
                 <!-- house image -->
                 <div class="house-image">
-                    <img src="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>" alt="house-img" width="1080" height="720">
+                    <picture>
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>?format=webp" type="image/webp">
+                        <img loading="lazy" src="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>" alt="house-img" width="1080" height="720">
+                    </picture>
                 </div>
 
                 <!-- house details -->
