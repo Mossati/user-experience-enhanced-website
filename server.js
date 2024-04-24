@@ -88,12 +88,15 @@ app.post('/favorite/:id', function (request, response) {
       houseRatings[category] = rating
     })
 
+    // Voeg de notes inhoud toe aan de array
     houseRatings['note'] = notes
+    // Log test
     console.log('House ID: ' + houseId)
     console.log('User ID: ' + userId)
     console.log('List ID: ' + listId)
     console.log(houseRatings)
 
+    // Fetch de API link en post naar de API
     fetchJson(f_feedback, {
       method: 'POST',
       body: JSON.stringify({
@@ -112,10 +115,6 @@ app.post('/favorite/:id', function (request, response) {
       } else { // Geen enhanced property dus wordt er een redirect gedaan
         response.redirect(303, '/favorite/' + listId)
       }
-    }).catch((error) => {
-      // error
-      console.error('Error:', error);
-      response.status(500).send('Er is een fout opgetreden bij het verwerken van uw verzoek.');
   })
 })
 
