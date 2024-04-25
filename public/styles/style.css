@@ -31,6 +31,11 @@ body {
     color: var(--mine-shaft);
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+}
+
 .hidden {
     display: none;
 }
@@ -56,9 +61,9 @@ body {
     align-items: center;
     list-style-type: none;
 
-    /* & .star-item input {
+    & .star-item input {
         display: none;
-    } */
+    }
 
     & .star-item label {
         display: inline-block;
@@ -66,7 +71,6 @@ body {
         height: 1.5em;
         cursor: pointer;
         transition: 0.5s ease;
-        margin-right: 1em;
         background-image: url('/assets/icon-star.svg');
         background-size: cover;
     }
@@ -137,7 +141,7 @@ nav {
     margin-bottom: 1em;
 
     & .nav-section {
-
+        
         & .nav-list {
             display: flex;
             flex-direction: row;
@@ -154,11 +158,6 @@ nav {
                 color: var(--white);
                 text-overflow: ellipsis;
 
-                & img {
-                    width: 2em;
-                    height: 2em;
-                }
-
                 & .logo-funda {
                     width: 7.75em;
                     height: auto;
@@ -173,8 +172,24 @@ nav {
 
     & .nav-section:nth-child(1) {
         & .nav-list {
+            & .nav-item:nth-child(1)::before {
+                content: url('/assets/icon-menu.svg');
+            }
+
             & .nav-item:nth-child(2):hover {
                 background: none;
+            }
+        }
+    }
+
+    & .nav-section:nth-child(2) {
+        & .nav-list {
+            & .nav-item:nth-child(1)::before {
+                content: url('/assets/icon-house.svg');
+            }
+    
+            & .nav-item:nth-child(2)::before {
+                content: url('/assets/icon-user.svg');
             }
         }
     }
@@ -185,18 +200,11 @@ nav {
 .list-section {
     padding: 0 1em;
     margin-bottom: 1em;
+    grid-area: list-section;
 
     & h1 {
         font-weight: bold;
     }
-}
-
-.list-desktop {
-    display: none;
-}
-
-.list-mobile {
-    display: block;
 }
 /* ================================================ */
 /* members */
@@ -204,6 +212,7 @@ nav {
 .member-section {
     padding: 0 1em;
     margin-bottom: 1em;
+    grid-area: member-section;
     
     & h2 {
         font-size: 1.2em;
@@ -262,6 +271,7 @@ nav {
     width: 100%;
     padding: 0 1em;
     margin-bottom: 1em;
+    grid-area: search-section;
 
     & .search-list {
         display: flex;
@@ -305,6 +315,7 @@ nav {
 .option-section {
     padding: 0 1em;
     margin-bottom: 1em;
+    grid-area: option-section;
 
     & .option-list {
         display: flex;
@@ -320,10 +331,21 @@ nav {
 
             & .btn-option {
                 display: flex;
-                flex-direction: row;
                 justify-content: center;
                 align-items: center;
                 width: 100%;
+            }
+
+            &:nth-child(1) .btn-option::before {
+                content: url('/assets/icon-filter.svg');
+            }
+        
+            &:nth-child(2) .btn-option::before {
+                content: url('/assets/icon-sort.svg');
+            }
+        
+            &:nth-child(3) .btn-option::before {
+                content: url('/assets/icon-add.svg');
             }
         }
 
@@ -338,6 +360,7 @@ nav {
 .house-section {
     padding: 0 1em;
     margin-bottom: 1em;
+    grid-area: house-section;
 
     & .house-list {
         display: flex;
@@ -352,71 +375,98 @@ nav {
             width: inherit;
             margin-bottom: 1em;
 
-            & .house-image {
-                width: 100%;
-                height: 170px;
-                background-color: var(--silver);
-                margin-bottom: 0.5em;
-
-                & img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
+            & .house-content:nth-child(2) {
+                border-bottom: 0.1em solid var(--silver);
+                border-left: 0.1em solid var(--silver);
+                border-right: 0.1em solid var(--silver);
+                border-bottom-left-radius: 0.5em;
+                border-bottom-right-radius: 0.5em;
+                overflow: hidden;
             }
 
-            & .house-details {
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                align-items: start;
-                list-style-type: none;
+            & .house-content {
                 
-                & .house-title {
+                & .house-image {
+                    width: 100%;
+                    height: 12em;
+                    background-color: var(--silver);
+                    border-top-left-radius: 0.5em;
+                    border-top-right-radius: 0.5em;
+                    overflow: hidden;
+    
+                    & img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                & .house-details {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: start;
+                    align-items: start;
+                    list-style-type: none;
+                    border-bottom: 0.1em solid var(--silver);
+                    border-left: 0.1em solid var(--silver);
+                    border-right: 0.1em solid var(--silver);
+                    padding: 0.75em;
+                    
+                    & .house-title {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+    
+                        & h2 {
+                            font-size: 1em;
+                            & a {
+                                color: var(--lochmara);
+                                text-decoration: none;
+                                text-wrap: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                display: block;
+                                width: 15em;
+                            }
+                        }
+    
+                        & .btn-remove {
+                            background: none;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+    
+                    & .house-price {
+                        font-weight: bold;
+                    }
+    
+                    & .house-agent {
+                        color: var(--lochmara);
+                    }
+                }
+
+                & .house-rating-list {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
-                    width: 100%;
-
-                    & h2 {
-                        font-size: 1em;
-                        & a {
-                            color: var(--lochmara);
-                            text-decoration: none;
+                    list-style-type: none;
+                    padding: 0.75em;
+    
+                    & .rating-item:nth-child(1) {
+                        color: var(--lochmara);
+                        
+                        & .btn-type-2 {
+                            padding: 0;
                         }
                     }
-
-                    & .btn-remove {
-                        background: none;
-                        border: none;
-                        outline: none;
-                    }
                 }
-
-                & .house-price {
-                    font-weight: bold;
-                }
-
-                & .house-agent {
-                    color: var(--lochmara);
-                }
-            }
-
-            & .house-rating-list {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                list-style-type: none;
-                margin-top: 1em;
-
-                & .rating-item:nth-child(1) {
-                    color: var(--lochmara);
-                    
-                    & .btn-type-2 {
-                        padding: 0;
-                    }
+    
+                & .house-rating-list:hover {
+                    background-color: var(--regent-blue);
                 }
             }
         }
@@ -427,10 +477,10 @@ nav {
 /* ================================================ */
 .group-rating-article {
     background-color: var(--regent-blue);
-    padding: 0 0.75em;
+    border-top: 0.1em solid var(--silver);
 
-    & h3 {
-        padding-top: 1em;
+    & h3:nth-child(1) {
+        padding: 0.75em 0.75em 0 0.75em;
     }
 
     & .group-rating-list {
@@ -451,7 +501,7 @@ nav {
                 align-items: center;
                 list-style-type: none;
                 width: inherit;
-                margin-bottom: 1em;
+                padding: 0.75em;
 
                 & .user-item:nth-child(1) {
                     color: var(--lochmara);
@@ -463,6 +513,9 @@ nav {
             }
 
             & .user-rating-form {
+                border-top: 0.1em solid var(--silver);
+                padding: 0.75em;
+                
                 & .user-rating-list {
                     list-style-type: none;
     
@@ -513,26 +566,32 @@ nav {
     /* main */
     /* ================================================ */
     main {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: start;
-
-        & .main-section:nth-of-type(1) {
-            width: auto;
-        }
-
-        & .main-section:nth-of-type(2) {
-            width: 60%;
-        }
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "member-section list-section"
+            "member-section search-section"
+            "member-section option-section"
+            "member-section house-section";
+        padding: 0 15em;
     }
+    /* ================================================ */
+    /* navbar */
+    /* ================================================ */
+    nav {
+        padding: 0 20em;
 
-    .list-desktop {
-        display: block;
-    }
-
-    .list-mobile {
-        display: none;
+        & .nav-section {
+            
+            & .nav-list {
+    
+                & .nav-item {
+                    flex-direction: row;
+                    padding: 1.15em;
+                }
+            }
+        }
     }
     /* ================================================ */
     /* members */
@@ -586,30 +645,43 @@ nav {
     /* ================================================ */
     /* houses */
     /* ================================================ */
-    .house-item {
-        width: 100%;
-        height: 100%;
+    .house-section {
 
-        & .house-content:nth-of-type(1) {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-    
-            & .house-image {
-                width: 30%;
-                margin-bottom: 0;
-            }
-    
-            & .house-details {
-                margin-left: 0.5em;
-                width: 70%;
-            }
-        }
+        & .house-list {
 
-        & .house-content:nth-of-type(2) {
-            & .house-rating-list {
-                margin-top: 0;
-                padding: 0 0.75em;
+            & .house-item {
+
+                & .house-content:nth-child(1) {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                }
+
+                & .house-content {
+                    
+                    & .house-image {
+                        border-top-left-radius: 0.5em;
+                        border-top-right-radius: 0;
+                        width: 40%;
+                    }
+
+                    & .house-details {
+                        border-top-right-radius: 0.5em;
+                        border-top: 0.1em solid var(--silver);
+                        border-left: none;
+                        width: 60%;
+
+                        & .house-title {
+        
+                            & h2 {
+
+                                & a {
+                                    width: 25em;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

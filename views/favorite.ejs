@@ -7,12 +7,11 @@
 <!-- main -->
 <main>
     <!-- list section -->
-    <section class="list-section list-mobile">
+    <section class="list-section">
         <h1><%= list.title %></h1>
         <p><%= list.description %></p>
     </section>
 
-    <div class="main-section">
     <!-- member section -->
     <section class="member-section">
         <h2>Groepsleden</h2>
@@ -35,14 +34,6 @@
             <% } %>
         </ul>
     </section>
-    </div>
-
-    <div class="main-section">
-    <!-- list section -->
-    <section class="list-section list-desktop">
-        <h1><%= list.title %></h1>
-        <p><%= list.description %></p>
-    </section>
 
     <!-- search section -->
     <section class="search-section">
@@ -63,22 +54,13 @@
     <section class="option-section">
         <ul class="option-list">
             <li class="option-item">
-                <button type="button" class="btn-option">
-                    <img src="/assets/icon-filter.svg" alt="icon-filter" width="24" height="24">
-                    <p>Filters</p>
-                </button>
+                <button type="button" class="btn-option">Filters</button>
             </li>
             <li class="option-item">
-                <button type="button" class="btn-option">
-                    <img src="/assets/icon-sort.svg" alt="icon-sort" width="24" height="24">
-                    <p>Sorteren</p>
-                </button>
+                <button type="button" class="btn-option">Sorteren</button>
             </li>
             <li class="option-item">
-                <button type="button" class="btn-option">
-                    <img src="/assets/icon-add.svg" alt="icon-add">
-                    <p>Voeg toe</p>
-                </button>
+                <button type="button" class="btn-option">Voeg toe</button>
             </li>
         </ul>
     </section>
@@ -126,7 +108,7 @@
 
                 <!-- rating score list -->
                 <article class="group-rating-article hidden">
-                    <h3>Score</h3>
+                    <h3>Leden</h3>
                     <ul class="group-rating-list">
                         <li class="group-rating-item">
                             <ul class="user-list">
@@ -154,7 +136,8 @@
                                     <hr>
                                     <% } %>
                                 </div>
-                                
+
+                                <h3>Score</h3>
                                 <input type="hidden" value="<%= house.f_houses_id.id %>" name="houseId">
                                 <input type="hidden" value="3" name="userId">
                                 <ul class="user-rating-list">
@@ -210,7 +193,6 @@
             <%  }) %>
         </ul>
     </section>
-</div>
 </main>
 
 <!-- foot -->
