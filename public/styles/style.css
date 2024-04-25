@@ -603,7 +603,7 @@ nav {
             justify-content: start;
             align-items: center;
             list-style-type: none;
-            overflow-y: scroll;
+            overflow-y: hidden;
 
             & .member-item {
                 padding: 0.75em;
