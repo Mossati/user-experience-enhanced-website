@@ -96,6 +96,9 @@ app.post('/favorite/:id', function (request, response) {
     console.log('List ID: ' + listId)
     console.log(houseRatings)
 
+    // Push de waarden in een nieuwe entry
+    FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings, notes: notes })
+
     // Fetch de API link en post naar de API
     fetchJson(f_feedback, {
       method: 'POST',

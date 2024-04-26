@@ -61,9 +61,9 @@ main {
     align-items: center;
     list-style-type: none;
 
-    & .star-item input {
+    /* & .star-item input {
         display: none;
-    }
+    } */
 
     & .star-item label {
         display: inline-block;
