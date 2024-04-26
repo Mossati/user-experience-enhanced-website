@@ -88,13 +88,10 @@ forms.forEach((form, index) => {
         data.append('enhanced', true);
 
         fetch(this.action, {
-
             // De POST method ophalen
             method: this.method,
-
             // De data van de form meegeven aan de body
             body: new URLSearchParams(data)
-
         }).then(function(response) {
             // Als de server een antwoord geeft, krijgen we een stream terug
             // We willen hiervan de text gebruiken, wat in dit geval HTML teruggeeft
@@ -118,6 +115,11 @@ forms.forEach((form, index) => {
             if (successBar.classList.contains('hidden')) {
                 successBar.classList.remove('hidden');
             }
+
+            // Haal na 5 seconden de bar weer weg
+            setTimeout(function() {
+                successBar.classList.add('hidden');
+            }, 5000);
         });
         event.preventDefault();
     });

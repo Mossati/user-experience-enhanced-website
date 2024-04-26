@@ -11,6 +11,7 @@ const f_list = apiUrl + 'f_list'
 const f_files = apiUrl + 'f_houses_files'
 const f_feedback = apiUrl + 'f_feedback'
 const FavoriteRatings = []
+let listData2
 
 // Maak een nieuwe express app aan
 const app = express()
@@ -59,6 +60,7 @@ app.get('/favorite/:id', function (request, response) {
     fetchJson(f_list + "/" + request.params.id + '?fields=*.*.*').then((listData) => {
         //console.log(listData.data.houses)
         //console.log(FavoriteRatings)
+        listData2 = listData
 
         response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
     })
@@ -97,7 +99,7 @@ app.post('/favorite/:id', function (request, response) {
     console.log(houseRatings)
 
     // Push de waarden in een nieuwe entry
-    FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings, notes: notes })
+    FavoriteRatings.push({houseId: houseId, userId: userId, listId: listId, rating: houseRatings})
 
     // Fetch de API link en post naar de API
     fetchJson(f_feedback, {
@@ -114,7 +116,7 @@ app.post('/favorite/:id', function (request, response) {
     }).then((apiresponse) => {
       // Als er een enhanced property is dan wordt er een render gedaan client-side
       if (request.body.enhanced) {
-        response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
+        response.render('favorite', {list: listData2.data, houses: listData2.data.houses, ratings: FavoriteRatings})
       } else { // Geen enhanced property dus wordt er een redirect gedaan
         response.redirect(303, '/favorite/' + listId)
       }

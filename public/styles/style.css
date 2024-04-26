@@ -41,15 +41,14 @@ main {
 }
 
 .success-bar {
-    background-color: rgb(152, 235, 158);
+    background-color: rgb(184, 255, 188);
     color: green;
     padding: 1em;
-    border-radius: 0.5em;
     position: fixed;
     top: 1em;
-    left: 25%;
-    transform: translateX(50%);
+    right: 1em;
     z-index: 999999;
+    border-left: 0.2em solid green;
 }
 /* ================================================ */
 /* rating */
