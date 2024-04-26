@@ -112,6 +112,7 @@ forms.forEach((form, index) => {
             document.querySelectorAll('.rating-test')[index].innerHTML = responseDOM.innerHTML;
             //console.log(responseHTML);
 
+            // Haal de hidden class weg van de bar
             if (successBar.classList.contains('hidden')) {
                 successBar.classList.remove('hidden');
             }
