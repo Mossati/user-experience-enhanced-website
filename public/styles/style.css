@@ -173,6 +173,8 @@ nav {
         & .nav-list {
             & .nav-item:nth-child(1)::before {
                 content: url('/assets/icon-menu.svg');
+                width: 24px;
+                height: 24px;
             }
 
             & .nav-item:nth-child(2):hover {
@@ -185,10 +187,14 @@ nav {
         & .nav-list {
             & .nav-item:nth-child(1)::before {
                 content: url('/assets/icon-house.svg');
+                width: 24px;
+                height: 24px;
             }
     
             & .nav-item:nth-child(2)::before {
                 content: url('/assets/icon-user.svg');
+                width: 24px;
+                height: 24px;
             }
         }
     }
@@ -337,14 +343,20 @@ nav {
 
             &:nth-child(1) .btn-option::before {
                 content: url('/assets/icon-filter.svg');
+                width: 24px;
+                height: 24px;
             }
         
             &:nth-child(2) .btn-option::before {
                 content: url('/assets/icon-sort.svg');
+                width: 24px;
+                height: 24px;
             }
         
             &:nth-child(3) .btn-option::before {
                 content: url('/assets/icon-add.svg');
+                width: 24px;
+                height: 24px;
             }
         }
 
