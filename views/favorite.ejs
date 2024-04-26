@@ -77,6 +77,7 @@
                 <!-- house image -->
                 <div class="house-image">
                     <picture>
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>?format=avif" type="image/avif">
                         <source srcset="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>?format=webp" type="image/webp">
                         <img loading="lazy" src="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>" alt="house-img" width="1080" height="720">
                     </picture>

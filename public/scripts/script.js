@@ -107,6 +107,7 @@ forms.forEach((form, index) => {
             // Selecteer het rating gedeelte uit de tijdelijke DOM
             let responseDOM = tempDOM.querySelectorAll('.rating-test')[index];
 
+            // log
             console.log(responseDOM);
             console.log(document.querySelectorAll('.rating-test')[index]);
             // Selecteer het rating gedeelte uit de DOM en vervang het
