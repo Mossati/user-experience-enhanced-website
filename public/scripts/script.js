@@ -84,7 +84,7 @@ forms.forEach((form, index) => {
     console.log(index);
     form.addEventListener('submit', function(event) {
         // Voeg een extra eigenschap aan de formulierdata toe
-        let data = new FormData(this);
+        const data = new FormData(this);
         data.append('enhanced', true);
 
         fetch(this.action, {
@@ -102,11 +102,11 @@ forms.forEach((form, index) => {
 
         }).then(function(responseHTML) {
             // Maak tijdelijk DOM element aan
-            let tempDOM = document.createElement('div');
+            const tempDOM = document.createElement('div');
             // Plaats de responseHTML in de tijdelijke DOM
             tempDOM.innerHTML = responseHTML;
             // Selecteer het rating gedeelte uit de tijdelijke DOM
-            let responseDOM = tempDOM.querySelectorAll('.rating-test')[index];
+            const responseDOM = tempDOM.querySelectorAll('.rating-test')[index];
 
             // log
             console.log(responseDOM);
