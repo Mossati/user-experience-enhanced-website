@@ -85,6 +85,7 @@ forms.forEach((form, index) => {
     form.addEventListener('submit', function(event) {
         // Voeg een extra eigenschap aan de formulierdata toe
         let data = new FormData(this);
+        data.append('enhanced', true);
 
         fetch(this.action, {
 
