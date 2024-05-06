@@ -116,7 +116,10 @@ app.post('/favorite/:id', function (request, response) {
     }).then((apiresponse) => {
       // Als er een enhanced property is dan wordt er een render gedaan client-side
       if (request.body.enhanced) {
-        response.render('favorite', {list: listData2.data, houses: listData2.data.houses, ratings: FavoriteRatings})
+        // response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
+        fetchJson(f_list + "/" + listId + '?fields=*.*.*').then((listData) => {
+          response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
+      })
       } else { // Geen enhanced property dus wordt er een redirect gedaan
         response.redirect(303, '/favorite/' + listId)
       }
